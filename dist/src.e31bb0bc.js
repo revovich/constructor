@@ -117,73 +117,294 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"model.js":[function(require,module,exports) {
+})({"assets/image.png":[function(require,module,exports) {
+module.exports = "/image.90ac9039.png";
+},{}],"utils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.row = row;
+exports.col = col;
+exports.css = css;
+
+function row(content) {
+  var styles = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  return "<div class=\"row\" style=\"".concat(styles, "\">").concat(content, "</div>");
+}
+
+function col(content) {
+  return "<div class=\"col-sm\">".concat(content, "</div>");
+}
+
+function css() {
+  var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  // const keys = Object.keys(styles)
+  // const array = keys.map(key => {
+  //     return `${key}: ${styles[key]}`
+  // })
+  // return array.join(';')
+  var toString = function toString(key) {
+    return "".concat(key, ": ").concat(styles[key]);
+  };
+
+  return Object.keys(styles).map(toString).join(';');
+}
+},{}],"classes/blocks.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ImageBlock = exports.ColumnsBlock = exports.TextBlock = exports.TitleBlock = void 0;
+
+var _utils = require("../utils");
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Block = /*#__PURE__*/function () {
+  function Block(value, options) {
+    _classCallCheck(this, Block);
+
+    // constructor(type,value,options) {
+    // this.type = type,  refactoring rulezzzzzzzz SOLID
+    this.value = value, this.options = options;
+  }
+
+  _createClass(Block, [{
+    key: "toHTML",
+    value: function toHTML() {
+      throw new Error('Method toHTML should be!');
+    }
+  }]);
+
+  return Block;
+}();
+
+var TitleBlock = /*#__PURE__*/function (_Block) {
+  _inherits(TitleBlock, _Block);
+
+  var _super = _createSuper(TitleBlock);
+
+  function TitleBlock(value, options) {
+    _classCallCheck(this, TitleBlock);
+
+    return _super.call(this, value, options); // super('title', value, options)
+    // refactoring rulezzzzzzzz SOLID
+  }
+
+  _createClass(TitleBlock, [{
+    key: "toHTML",
+    value: function toHTML() {
+      var _this$options = this.options,
+          _this$options$tag = _this$options.tag,
+          tag = _this$options$tag === void 0 ? 'h1' : _this$options$tag,
+          styles = _this$options.styles;
+      return (0, _utils.row)((0, _utils.col)("<".concat(tag, ">").concat(this.value, "</").concat(tag, ">")), (0, _utils.css)(styles));
+    }
+  }]);
+
+  return TitleBlock;
+}(Block);
+
+exports.TitleBlock = TitleBlock;
+
+var TextBlock = /*#__PURE__*/function (_Block2) {
+  _inherits(TextBlock, _Block2);
+
+  var _super2 = _createSuper(TextBlock);
+
+  function TextBlock(value, options) {
+    _classCallCheck(this, TextBlock);
+
+    return _super2.call(this, value, options);
+  }
+
+  _createClass(TextBlock, [{
+    key: "toHTML",
+    value: function toHTML() {
+      return (0, _utils.row)((0, _utils.col)("<p>".concat(this.value, "</p>")), (0, _utils.css)(this.options.styles));
+    }
+  }]);
+
+  return TextBlock;
+}(Block);
+
+exports.TextBlock = TextBlock;
+
+var ColumnsBlock = /*#__PURE__*/function (_Block3) {
+  _inherits(ColumnsBlock, _Block3);
+
+  var _super3 = _createSuper(ColumnsBlock);
+
+  function ColumnsBlock(value, options) {
+    _classCallCheck(this, ColumnsBlock);
+
+    return _super3.call(this, value, options);
+  }
+
+  _createClass(ColumnsBlock, [{
+    key: "toHTML",
+    value: function toHTML() {
+      var html = this.value.map(_utils.col).join('');
+      return (0, _utils.row)(html, (0, _utils.css)(this.options.styles));
+    }
+  }]);
+
+  return ColumnsBlock;
+}(Block);
+
+exports.ColumnsBlock = ColumnsBlock;
+
+var ImageBlock = /*#__PURE__*/function (_Block4) {
+  _inherits(ImageBlock, _Block4);
+
+  var _super4 = _createSuper(ImageBlock);
+
+  function ImageBlock(value, options) {
+    _classCallCheck(this, ImageBlock);
+
+    return _super4.call(this, value, options);
+  }
+
+  _createClass(ImageBlock, [{
+    key: "toHTML",
+    value: function toHTML() {
+      var _this$options2 = this.options,
+          is = _this$options2.imageStyles,
+          _this$options2$alt = _this$options2.alt,
+          alt = _this$options2$alt === void 0 ? '' : _this$options2$alt,
+          styles = _this$options2.styles;
+      return (0, _utils.row)("<img src=\"".concat(this.value, "\" alt=\"").concat(alt, "\" style=\"").concat((0, _utils.css)(is), "\" />"), (0, _utils.css)(styles));
+    }
+  }]);
+
+  return ImageBlock;
+}(Block);
+
+exports.ImageBlock = ImageBlock;
+},{"../utils":"utils.js"}],"model.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.model = void 0;
-var model = [{
-  type: 'title',
-  value: 'Hello world from JS!!!'
-}, {
-  type: 'text',
-  value: 'here we go with some text'
-}, {
-  type: 'columns',
-  value: ['11111111', '22222222', '33333333']
-}, {
-  type: 'image',
-  value: './assets/image.png'
-}];
+
+var _image = _interopRequireDefault(require("./assets/image.png"));
+
+var _blocks = require("./classes/blocks");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var text = "\nCool video and JS lessons here: <a href=\"youtube.com\" target=\"_blank\">YOUtube</a>\n";
+var model = [new _blocks.TitleBlock('Hello world from JS!!!', {
+  tag: 'h2',
+  styles: {
+    background: 'linear-gradient(to right, #ff0099, #493240)',
+    color: '#fff',
+    padding: '1.5rem',
+    'text-align': 'center'
+  }
+}), // refactoring code after we create a Class (class Block)
+// {
+//     type: 'title', value: 'Hello world from JS!!!', options: {
+//         tag: 'h2',
+//         // styles: `background: linear-gradient(to right, #ff0099, #493240); color:#fff; text-align: center; padding: 1.5rem`
+//         styles: {
+//             background: 'linear-gradient(to right, #ff0099, #493240)',
+//             color: '#fff',
+//             padding: '1.5rem',
+//             'text-align': 'center'
+//         }
+//     }
+// },
+new _blocks.TextBlock('text', {
+  styles: {
+    background: 'linear-gradient(to left, #f2994a, #f2c94c)',
+    padding: '1rem',
+    'font-weight': 'bold'
+  }
+}), // {
+//     type: 'text', value: text, options: {
+//         styles: {
+//             background: 'linear-gradient(to left, #f2994a, #f2c94c)',
+//             padding: '1rem',
+//             'font-weight': 'bold'
+//         }
+//     }
+// },
+new _blocks.ColumnsBlock(['App builded on pure VanilaJS without framework', 'SOLID, OOP in JS included', 'JS it`s really realy easy. Try to build UI your own hands'], {
+  styles: {
+    background: 'linear-gradient(to bottom, #8e2de2, #4a00e0)',
+    padding: '2rem',
+    color: '#fff',
+    'font-weight': 'bold'
+  }
+}), // {
+//     type: 'columns', value: [
+//         'App builded on pure VanilaJS without framework',
+//         'SOLID, OOP in JS included',
+//         'JS it`s really realy easy. Try to build UI your own hands'
+//         ], options: {
+//         styles: {
+//             background: 'linear-gradient(to bottom, #8e2de2, #4a00e0)',
+//             padding: '2rem',
+//             color: '#fff',
+//             'font-weight': 'bold'
+//             }
+//         }
+// },
+new _blocks.ImageBlock(_image.default, {
+  styles: {
+    padding: '2rem 0',
+    display: 'flex',
+    'justify-content': 'center'
+  },
+  imageStyles: {
+    width: '500px',
+    height: 'auto'
+  },
+  alt: 'This is a image'
+}) // {
+//     type: 'image', value: image, options: {
+//         styles: {
+//             padding: '2rem 0',
+//             display: 'flex',
+//             'justify-content': 'center'
+//         },
+//         imageStyles: {
+//             width: '500px',
+//             height: 'auto'
+//         },
+//         alt: 'This is a image'
+//     }
+// }
+];
 exports.model = model;
-},{}],"templates.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.templates = void 0;
-
-function title(block) {
-  return "<div class=\"row\">\n                <div class=\"col-sm\">\n                    <h1>".concat(block.value, "</h1> \n                </div>\n            </div>\n    ");
-}
-
-function text(block) {
-  return "<div class=\"row\">\n                <div class=\"col-sm\">\n                    <p>".concat(block.value, "</p>\n                </div>\n            </div>\n    ");
-}
-
-function columns(block) {
-  //  NOT a GOOD code  ---- не совсем хорошее решение ----
-  //     let html = ''
-  //     block.value.forEach(item => {
-  //         html += `
-  //             <div class="col-sm">
-  //                 ${item}
-  //             </div>
-  //         `
-  //     })
-  // good code 
-  var html = block.value.map(function (item) {
-    return "<div class=\"col-sm\">".concat(item, "</div>");
-  }); //
-
-  return "\n        <div class=\"row\">\n            ".concat(html.join(''), "\n        </div>\n    ");
-}
-
-function image(block) {
-  return "\n        <div class=\"row\">\n            <img src=\"".concat(block.value, "\" />\n        </div>\n    ");
-}
-
-var templates = {
-  title: title,
-  text: text,
-  image: image,
-  columns: columns
-};
-exports.templates = templates;
-},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./assets/image.png":"assets/image.png","./classes/blocks":"classes/blocks.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -260,10 +481,9 @@ module.hot.accept(reloadCSS);
 
 var _model = require("./model");
 
-var _templates = require("./templates");
-
 require("./styles/main.css");
 
+// import {templates} from './templates'  After we code Classes in blocks.js no need more this file
 var $site = document.querySelector('#site');
 
 _model.model.forEach(function (block) {
@@ -277,13 +497,12 @@ _model.model.forEach(function (block) {
   // } else if (block.type === 'image') {
   //     html = image(block)
   // }
-  var toHTML = _templates.templates[block.type];
-
-  if (toHTML) {
-    $site.insertAdjacentHTML("beforeend", toHTML(block));
-  }
+  // const toHTML = templates[block.type] After we code Classes in blocks.js no need more this
+  // console.log(block.toHTML()); After we code Classes (SOLID Refactoring)
+  // if (toHTML) {  After we code Classes (SOLID Refactoring)
+  $site.insertAdjacentHTML("beforeend", block.toHTML()); // }  After we code Classes (SOLID Refactoring)
 });
-},{"./model":"model.js","./templates":"templates.js","./styles/main.css":"styles/main.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./model":"model.js","./styles/main.css":"styles/main.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -311,7 +530,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49226" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60895" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
