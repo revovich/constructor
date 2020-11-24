@@ -28,7 +28,7 @@ export const model = [
     //         }
     //     }
     // },
-    new TextBlock('text', {
+    new TextBlock(text, {
         styles: {
             background: 'linear-gradient(to left, #f2994a, #f2c94c)',
             padding: '1rem',
